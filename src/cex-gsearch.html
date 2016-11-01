@@ -1,0 +1,70 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="cex-gsearch">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+
+        padding: 10px;
+      }
+      .container {
+        @apply(--layout-horizontal);
+      }
+      .flexchild {
+        @apply(--layout-flex);
+      }
+    </style>
+
+    <div class="card container">
+      <div class="flexchild">
+        <paper-input id="query" required label="Buscar en Google" on-keydown="keyPressed" no-label-float></paper-input>
+      </div>
+      <div>
+        <paper-icon-button icon="search" title="search" on-click="search"></paper-icon-button>
+      </div>
+    </div>
+
+  </template>
+
+  <script>
+    Polymer({
+      is: 'cex-gsearch',
+      properties: {
+        site: {
+          type: String,
+          value: ""
+        }
+      },
+      listeners: {
+      
+      },
+      search: function(e) {
+        query = this.$.query.value.trim();
+        site = encodeURI(this.site.trim());
+
+        if (query.length === 0)
+          return;
+
+        if (site.length === 0)
+          url = "https://www.google.cl/?gws_rd=ssl#q=";
+        else
+          url = "https://www.google.cl/?gws_rd=ssl#q=site:" + site + "+";
+
+        url = url + query;
+        
+        console.log(url);
+        win = window.open(url, '_blank');
+        win.focus();
+      },
+      keyPressed: function(e) {
+        // check if 'enter' was pressed
+        if (e.keyCode === 13) {
+            this.search();
+        }
+      }
+
+    });
+  </script>
+</dom-module>

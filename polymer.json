@@ -1,0 +1,19 @@
+{
+  "entrypoint": "index.html",
+  "shell": "src/cex-app.html",
+  "fragments": [
+    "src/cex-gsearch.html",
+    "src/cex-view2.html",
+    "src/cex-view3.html",
+    "src/cex-view404.html"
+  ],
+  "sourceGlobs": [
+   "src/**/*",
+   "images/**/*",
+   "bower.json"
+  ],
+  "includeDependencies": [
+    "manifest.json",
+    "bower_components/webcomponentsjs/webcomponents-lite.min.js"
+  ]
+}
